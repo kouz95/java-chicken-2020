@@ -3,9 +3,9 @@ package domain;
 public class Order {
 	private final Table table;
 	private final Menu menu;
-	private final int menuCount;
+	private final MenuCount menuCount;
 
-	public Order(Table table, Menu menu, int menuCount) {
+	public Order(Table table, Menu menu, MenuCount menuCount) {
 		this.table = OrderedTable.of(table);
 		this.menu = menu;
 		this.menuCount = menuCount;
@@ -23,7 +23,7 @@ public class Order {
 		return menu.getName();
 	}
 
-	public int getMenuCount() {
+	public MenuCount getMenuCount() {
 		return menuCount;
 	}
 

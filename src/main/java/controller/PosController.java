@@ -7,6 +7,7 @@ import static view.InputView.*;
 import static view.OutputView.*;
 
 import domain.CommandType;
+import domain.MenuCount;
 import domain.PayType;
 import domain.Pos;
 import service.PosService;
@@ -35,8 +36,8 @@ public class PosController {
 		int tableNumber = inputTableNumber();
 		printMenus(posService.showMenus());
 		int menuNumber = inputMenuNumber();
-		int menuCount = inputMenuCount();
 		try {
+			MenuCount menuCount = new MenuCount(inputMenuCount());
 			posService.registerOrder(pos, tableNumber, menuNumber, menuCount);
 		} catch (IllegalArgumentException e) {
 			printException(e.getMessage());

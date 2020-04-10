@@ -63,7 +63,7 @@ public class OutputView {
         System.out.println("## 주문 내역");
         for (Order order : orders) {
             System.out.println("메뉴\t수량\t금액");
-            System.out.printf("%s\t%d\t%d\n", order.getMenuName(), order.getMenuCount(), order.getPrice());
+            System.out.printf("%s\t%d\t%d\n", order.getMenuName(), order.getMenuCount().intValues(), order.getPrice());
         }
     }
 

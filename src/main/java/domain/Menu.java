@@ -21,8 +21,8 @@ public class Menu {
         return name;
     }
 
-    public int getTotalPrice(int menuCount) {
-        return price * menuCount;
+    public int getTotalPrice(MenuCount menuCount) {
+        return menuCount.multiply(price);
     }
 
     @Override

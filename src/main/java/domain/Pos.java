@@ -31,7 +31,8 @@ public class Pos {
 		List<Order> ordersInTable = getOrdersIn(tableNumber);
 		int discountAmount = new ChickenCount(ordersInTable.stream()
 			.filter(Order::isMenuChicken)
-			.mapToInt(Order::getMenuCount)
+			.map(Order::getMenuCount)
+			.mapToInt(MenuCount::intValues)
 			.sum())
 			.getDiscountAmount();
 

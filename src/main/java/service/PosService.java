@@ -5,6 +5,7 @@ import java.util.List;
 import dao.MenuDAO;
 import dao.TableDAO;
 import domain.Menu;
+import domain.MenuCount;
 import domain.Order;
 import domain.PayType;
 import domain.Pos;
@@ -31,7 +32,7 @@ public class PosService {
 		return menuDAO.findAll();
 	}
 
-	public void registerOrder(Pos pos, int tableNumber, int menuNumber, int menuCount) {
+	public void registerOrder(Pos pos, int tableNumber, int menuNumber, MenuCount menuCount) {
 		pos.addOrder(new Order(tableDAO.findTableByNumber(tableNumber), menuDAO.findMenuByNumber(menuNumber), menuCount));
 	}
 
