@@ -24,6 +24,7 @@ public class PosController {
 	}
 
 	public void run(Pos pos, CommandType commandType) {
+		printMainScreen();
 		commandMapper.get(commandType).accept(pos);
 	}
 
@@ -33,7 +34,6 @@ public class PosController {
 		printMenus(posService.showMenus());
 		int menuNumber = inputMenuNumber();
 		int menuCount = inputMenuCount();
-
 		posService.registerOrder(pos, tableNumber, menuNumber, menuCount);
 	}
 
@@ -42,6 +42,6 @@ public class PosController {
 	}
 
 	private void exit(Pos pos) {
-
+		System.exit(0);
 	}
 }
