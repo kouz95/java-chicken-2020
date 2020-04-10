@@ -27,7 +27,7 @@ public class Pos {
 			.collect(toList());
 	}
 
-	public int getPriceIn(int tableNumber) {
+	public int calculatePriceIn(int tableNumber) {
 		List<Order> ordersInTable = getOrdersIn(tableNumber);
 		int discountAmount = new ChickenCount(ordersInTable.stream()
 			.filter(Order::isMenuChicken)

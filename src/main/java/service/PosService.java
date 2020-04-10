@@ -12,6 +12,8 @@ import domain.Tables;
 import domain.Table;
 
 public class PosService {
+	private static final int NO_ORDERS = 0;
+
 	private final TableDAO tableDAO;
 	private final MenuDAO menuDAO;
 
@@ -34,12 +36,16 @@ public class PosService {
 	}
 
 	public double pay(int tableNumber, PayType payType, Pos pos) {
-		int price = pos.getPriceIn(tableNumber);
+		int price = pos.calculatePriceIn(tableNumber);
 		pos.deleteOrderIn(tableNumber);
 		return payType.calculate(price);
 	}
 
 	public List<Order> showOrders(int tableNumber, Pos pos) {
-		return pos.getOrdersIn(tableNumber);
+		List<Order> orders = pos.getOrdersIn(tableNumber);
+		if (orders.size() == NO_ORDERS) {
+			throw new IllegalArgumentException("주문이 존재하지 않는 테이블 입니다.");
+		}
+		return orders;
 	}
 }

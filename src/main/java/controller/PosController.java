@@ -36,15 +36,31 @@ public class PosController {
 		printMenus(posService.showMenus());
 		int menuNumber = inputMenuNumber();
 		int menuCount = inputMenuCount();
-		posService.registerOrder(pos, tableNumber, menuNumber, menuCount);
+		try {
+			posService.registerOrder(pos, tableNumber, menuNumber, menuCount);
+		} catch (IllegalArgumentException e) {
+			printException(e.getMessage());
+			registerOrder(pos);
+		}
 	}
 
 	private void pay(Pos pos) {
 		printTables(posService.showTables(pos));
 		int tableNumber = inputTableNumber();
-		printOrders(posService.showOrders(tableNumber, pos));
-		printPayProgress(tableNumber);
-		printPayPrice(posService.pay(tableNumber, PayType.of(inputPayTypeNumber()), pos));
+
+		try {
+			printOrders(posService.showOrders(tableNumber, pos));
+		} catch (IllegalArgumentException e) {
+			printException(e.getMessage());
+			return;
+		}
+		try {
+			printPayProgress(tableNumber);
+			printPayPrice(posService.pay(tableNumber, PayType.of(inputPayTypeNumber()), pos));
+		} catch (IllegalArgumentException e) {
+			printException(e.getMessage());
+			pay(pos);
+		}
 	}
 
 	private void exit(Pos pos) {

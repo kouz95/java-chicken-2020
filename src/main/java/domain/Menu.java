@@ -21,7 +21,7 @@ public class Menu {
         return name;
     }
 
-    public int calculatePrice(int menuCount) {
+    public int getTotalPrice(int menuCount) {
         return price * menuCount;
     }
 

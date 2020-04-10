@@ -75,4 +75,9 @@ public class OutputView {
         System.out.println("## 최종 결제할 금액");
         System.out.println(price + "원");
     }
+
+    public static void printException(String message) {
+        System.out.println("입력 오류!!");
+        System.out.println(message);
+    }
 }

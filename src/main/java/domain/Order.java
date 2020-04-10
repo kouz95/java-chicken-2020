@@ -28,7 +28,7 @@ public class Order {
 	}
 
 	public int getPrice() {
-		return menu.calculatePrice(menuCount);
+		return menu.getTotalPrice(menuCount);
 	}
 
 	public boolean isMenuChicken() {
