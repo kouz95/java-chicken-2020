@@ -17,6 +17,14 @@ public class Menu {
         return this.number == number;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int calculatePrice(int menuCount) {
+        return price * menuCount;
+    }
+
     @Override
     public String toString() {
         return category + " " + number + " - " + name + " : " + price + "원";

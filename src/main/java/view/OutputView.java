@@ -1,6 +1,7 @@
 package view;
 
 import domain.Menu;
+import domain.Order;
 import domain.Table;
 
 import java.util.List;
@@ -56,5 +57,17 @@ public class OutputView {
             System.out.printf(TABLE_FORMAT, table);
         }
         System.out.println();
+    }
+
+    public static void printOrders(List<Order> orders) {
+        System.out.println("## 주문 내역");
+        for (Order order : orders) {
+            System.out.println("메뉴\t수량\t금액");
+            System.out.printf("%s\t%d\t%d\n", order.getMenuName(), order.getMenuCount(), order.getPrice());
+        }
+    }
+
+    public static void printPayProgress(int tableNumber) {
+        System.out.printf("## %d번 테이블의 결제를 진행합니다.\n", tableNumber);
     }
 }

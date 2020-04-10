@@ -20,4 +20,10 @@ public class Pos {
 			.map(Order::getTable)
 			.collect(toList());
 	}
+
+	public List<Order> getOrdersIn(int tableNumber) {
+		return orders.stream()
+			.filter(order -> order.isTableNumberEquals(tableNumber))
+			.collect(toList());
+	}
 }

@@ -7,6 +7,7 @@ import static view.InputView.*;
 import static view.OutputView.*;
 
 import domain.CommandType;
+import domain.PayType;
 import domain.Pos;
 import service.PosService;
 
@@ -38,7 +39,11 @@ public class PosController {
 	}
 
 	private void pay(Pos pos) {
-
+		printTables(posService.showTables(pos));
+		int tableNumber = inputTableNumber();
+		printOrders(posService.showOrders(tableNumber, pos));
+		printPayProgress(tableNumber);
+		posService.pay(tableNumber, PayType.of(inputPayTypeNumber()), pos);
 	}
 
 	private void exit(Pos pos) {
