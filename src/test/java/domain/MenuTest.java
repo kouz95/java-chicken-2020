@@ -23,13 +23,13 @@ class MenuTest {
 	}
 
 	@Test
-	void calculatePriceForBeverage() {
-		assertEquals(10000, beverage.getTotalPrice(10));
+	void totalPriceForBeverage() {
+		assertEquals(10000, beverage.getTotalPrice(new MenuCount(10)));
 	}
 
 	@Test
-	void calculatePriceForChicken() {
-		assertEquals(chicken.getTotalPrice(1) * 10, chicken.getTotalPrice(10));
+	void totalPriceForChicken() {
+		assertEquals(chicken.getTotalPrice(new MenuCount(1)) * 10, chicken.getTotalPrice(new MenuCount(10)));
 	}
 
 	@Test
@@ -41,5 +41,10 @@ class MenuTest {
 	@Test
 	void getName() {
 		assertEquals("chicken", chicken.getName());
+	}
+
+	@Test
+	void testToString() {
+		assertEquals("[치킨] 1 - chicken : 16000원", chicken.toString());
 	}
 }
