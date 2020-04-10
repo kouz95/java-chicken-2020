@@ -1,15 +1,17 @@
 package domain;
 
-public class Table {
-    private final int number;
+public abstract class Table {
+    protected final int number;
 
-    public Table(final int number) {
+    protected Table(final int number) {
         this.number = number;
     }
 
     public boolean isNumberEquals(int number) {
         return this.number == number;
     }
+
+    public abstract boolean hasOrder();
 
     @Override
     public String toString() {

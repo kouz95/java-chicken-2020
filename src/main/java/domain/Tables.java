@@ -1,30 +1,31 @@
 package domain;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Tables {
-	private final Map<Table, Boolean> tables;
+	private final List<Table> tables;
 
-	private Tables(Map<Table, Boolean> tables) {
+	private Tables(List<Table> tables) {
 		this.tables = tables;
 	}
 
 	public static Tables of(List<Table> tables, List<Table> orderedTables) {
-		Map<Table, Boolean> result = new HashMap<>();
+		List<Table> result = new ArrayList<>();
 
 		for (Table table : tables) {
-			result.put(table, false);
-		}
-		for (Table ordered : orderedTables) {
-			result.replace(ordered, true);
+			int currentNumber = table.number;
+
+			result.add(orderedTables.stream()
+				.filter(ordered -> ordered.isNumberEquals(currentNumber))
+				.findFirst()
+				.orElse(table));
 		}
 
 		return new Tables(result);
 	}
 
 	public List<Table> toList() {
-		return List.copyOf(tables.keySet());
+		return List.copyOf(tables);
 	}
 }

@@ -9,10 +9,12 @@ import service.PosService;
 import view.InputView;
 
 public class Application {
-    // TODO 구현 진행
-    public static void main(String[] args) {
-        Pos pos = new Pos(new ArrayList<>());
-        new PosController(new PosService(new TableDAO(), new MenuDAO()))
-            .run(pos, CommandType.of(InputView.inputCommandNumber()));
-    }
+	public static void main(String[] args) {
+		Pos pos = new Pos(new ArrayList<>());
+		while (true) {
+			new PosController(new PosService(new TableDAO(), new MenuDAO()))
+				.run(pos, CommandType.of(InputView.inputCommandNumber()));
+		}
+	}
 }
+

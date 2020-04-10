@@ -6,7 +6,7 @@ public class Order {
 	private final int menuCount;
 
 	public Order(Table table, Menu menu, int menuCount) {
-		this.table = table;
+		this.table = OrderedTable.of(table);
 		this.menu = menu;
 		this.menuCount = menuCount;
 	}
