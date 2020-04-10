@@ -1,8 +1,10 @@
-package domain;
+package repository;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import domain.Table;
 
 public class TableRepository {
     private static final List<Table> tables = new ArrayList<>();

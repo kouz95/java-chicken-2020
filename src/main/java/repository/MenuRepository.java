@@ -1,8 +1,11 @@
-package domain;
+package repository;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import domain.Category;
+import domain.Menu;
 
 public class MenuRepository {
     private static final List<Menu> menus = new ArrayList<>();
