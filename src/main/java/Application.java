@@ -13,7 +13,7 @@ public class Application {
 		Pos pos = new Pos(new ArrayList<>());
 		while (true) {
 			new PosController(new PosService(new TableDAO(), new MenuDAO()))
-				.run(pos, CommandType.of(InputView.inputCommandNumber()));
+				.run(pos);
 		}
 	}
 }

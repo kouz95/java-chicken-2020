@@ -24,8 +24,9 @@ public class PosController {
 		this.posService = posService;
 	}
 
-	public void run(Pos pos, CommandType commandType) {
+	public void run(Pos pos) {
 		printMainScreen();
+		CommandType commandType = CommandType.of(inputCommandNumber());
 		commandMapper.get(commandType).accept(pos);
 	}
 
@@ -43,7 +44,7 @@ public class PosController {
 		int tableNumber = inputTableNumber();
 		printOrders(posService.showOrders(tableNumber, pos));
 		printPayProgress(tableNumber);
-		posService.pay(tableNumber, PayType.of(inputPayTypeNumber()), pos);
+		printPayPrice(posService.pay(tableNumber, PayType.of(inputPayTypeNumber()), pos));
 	}
 
 	private void exit(Pos pos) {

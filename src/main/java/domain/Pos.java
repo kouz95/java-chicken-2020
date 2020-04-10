@@ -26,4 +26,21 @@ public class Pos {
 			.filter(order -> order.isTableNumberEquals(tableNumber))
 			.collect(toList());
 	}
+
+	public int getPriceIn(int tableNumber) {
+		List<Order> ordersInTable = getOrdersIn(tableNumber);
+		int discountAmount = new ChickenCount(ordersInTable.stream()
+			.filter(Order::isMenuChicken)
+			.mapToInt(Order::getMenuCount)
+			.sum())
+			.getDiscountAmount();
+
+		return ordersInTable.stream()
+			.mapToInt(Order::getPrice)
+			.sum() - discountAmount;
+	}
+
+	public void deleteOrderIn(int tableNumber) {
+		orders.removeIf(order -> order.isTableNumberEquals(tableNumber));
+	}
 }

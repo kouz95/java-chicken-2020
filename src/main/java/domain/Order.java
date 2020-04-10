@@ -30,4 +30,8 @@ public class Order {
 	public int getPrice() {
 		return menu.calculatePrice(menuCount);
 	}
+
+	public boolean isMenuChicken() {
+		return menu.isChicken();
+	}
 }

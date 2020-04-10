@@ -33,7 +33,10 @@ public class PosService {
 		pos.addOrder(new Order(tableDAO.findTableByNumber(tableNumber), menuDAO.findMenuByNumber(menuNumber), menuCount));
 	}
 
-	public void pay(int tableNumber, PayType payType, Pos pos) {
+	public double pay(int tableNumber, PayType payType, Pos pos) {
+		int price = pos.getPriceIn(tableNumber);
+		pos.deleteOrderIn(tableNumber);
+		return payType.calculate(price);
 	}
 
 	public List<Order> showOrders(int tableNumber, Pos pos) {
