@@ -1,13 +1,17 @@
 package controller;
 
 import java.util.Map;
+import java.util.function.Consumer;
+
+import static view.InputView.*;
+import static view.OutputView.*;
 
 import domain.CommandType;
+import domain.Pos;
 import service.PosService;
-import view.OutputView;
 
 public class PosController {
-	private final Map<CommandType, Runnable> commandMapper = Map.of(
+	private final Map<CommandType, Consumer<Pos>> commandMapper = Map.of(
 		CommandType.ORDER_REGISTERING, this::registerOrder,
 		CommandType.PAYMENT, this::pay,
 		CommandType.EXIT, this::exit
@@ -19,19 +23,25 @@ public class PosController {
 		this.posService = posService;
 	}
 
-	public void run(CommandType commandType) {
-		commandMapper.get(commandType).run();
+	public void run(Pos pos, CommandType commandType) {
+		commandMapper.get(commandType).accept(pos);
 	}
 
-	public void registerOrder() {
-		OutputView.printTables(posService.showTables());
+	public void registerOrder(Pos pos) {
+		printTables(posService.showTables(pos));
+		int tableNumber = inputTableNumber();
+		printMenus(posService.showMenus());
+		int menuNumber = inputMenuNumber();
+		int menuCount = inputMenuCount();
+
+		posService.registerOrder(pos, tableNumber, menuNumber, menuCount);
 	}
 
-	private void pay() {
+	private void pay(Pos pos) {
 
 	}
 
-	private void exit() {
+	private void exit(Pos pos) {
 
 	}
 }

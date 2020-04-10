@@ -1,21 +1,18 @@
-import domain.Menu;
-import repository.MenuRepository;
-import domain.Table;
-import repository.TableRepository;
-import view.InputView;
-import view.OutputView;
+import java.util.ArrayList;
 
-import java.util.List;
+import controller.PosController;
+import dao.MenuDAO;
+import dao.TableDAO;
+import domain.CommandType;
+import domain.Pos;
+import service.PosService;
+import view.InputView;
 
 public class Application {
     // TODO 구현 진행
     public static void main(String[] args) {
-        final List<Table> tables = TableRepository.tables();
-        OutputView.printTables(tables);
-
-        final int tableNumber = InputView.inputTableNumber();
-
-        final List<Menu> menus = MenuRepository.menus();
-        OutputView.printMenus(menus);
+        Pos pos = new Pos(new ArrayList<>());
+        new PosController(new PosService(new TableDAO(), new MenuDAO()))
+            .run(pos, CommandType.of(InputView.inputCommandNumber()));
     }
 }

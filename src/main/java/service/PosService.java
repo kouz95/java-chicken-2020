@@ -2,19 +2,34 @@ package service;
 
 import java.util.List;
 
-import repository.OrderRepository;
+import dao.MenuDAO;
+import dao.TableDAO;
+import domain.Menu;
+import domain.Order;
+import domain.Pos;
+import domain.Tables;
+import repository.MenuRepository;
 import domain.Table;
-import repository.TableRepository;
 
 public class PosService {
-	private final OrderRepository orderRepository;
+	private final TableDAO tableDAO;
+	private final MenuDAO menuDAO;
 
-	public PosService(OrderRepository orderRepository) {
-		this.orderRepository = orderRepository;
+	public PosService(TableDAO tableDAO, MenuDAO menuDAO) {
+		this.tableDAO = tableDAO;
+		this.menuDAO = menuDAO;
 	}
 
-	// TODO: 2020/04/10 주문이 있는지 확인
-	public List<Table> showTables() {
-		return TableRepository.tables();
+	public List<Table> showTables(Pos pos) {
+		Tables tables = Tables.of(tableDAO.findAll(), pos.tables());
+		return tables.toList();
+	}
+
+	public List<Menu> showMenus() {
+		return menuDAO.findAll();
+	}
+
+	public void registerOrder(Pos pos, int tableNumber, int menuNumber, int menuCount) {
+		pos.addOrder(new Order(tableDAO.findTableByNumber(tableNumber), menuDAO.findMenuByNumber(menuNumber), menuCount));
 	}
 }
